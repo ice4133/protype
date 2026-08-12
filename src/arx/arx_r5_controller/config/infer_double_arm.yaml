@@ -1,0 +1,17 @@
+/arm_l:
+  ros__parameters:
+    arm_can_id: can1
+    arm_control_type: normal
+    arm_pub_topic_name: arm_l_status
+    arm_sub_topic_name: ARX_INFER_L
+    arm_end_type: 0
+
+/arm_r:
+  ros__parameters:
+    arm_can_id: can3
+    arm_control_type: normal
+    arm_pub_topic_name: arm_r_status
+    arm_sub_topic_name: ARX_INFER_R
+    arm_end_type: 0
+
+    

@@ -1,0 +1,16 @@
+.vscode/
+
+**pycache**
+**api
+
+build/
+devel/
+*.catkin_workspace
+
+.idea
+# pixi environments
+.pixi
+*.egg-info
+
+install/
+log/

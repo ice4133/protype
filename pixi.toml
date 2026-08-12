@@ -1,0 +1,49 @@
+[project]
+authors = ["Asahel <lichengmeng2001@foxmail.com>"]
+channels = ["https://prefix.dev/robostack-humble", "https://fast.prefix.dev/conda-forge"]
+name = "prototype"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[activation]
+scripts = ["install/setup.bash"]
+
+[activation.env]
+RMW_IMPLEMENTATION = "rmw_fastrtps_cpp"
+
+[dependencies]
+python = ">=3.8, <3.11"
+compilers = "*"
+cmake = ">=3.8,<3.16"
+make = "*"
+ninja = "*"
+ros-humble-desktop = ">=0.10.0,<0.11"
+colcon-common-extensions = ">=0.3.0,<0.4"
+rosdep = ">=0.25.1,<0.26"
+ros-humble-tf-transformations = ">=1.0.1,<2"
+librealsense = "==2.50.0"
+ros-humble-diagnostic-updater = ">=3.0.0,<4"
+ros-humble-xacro = ">=2.0.7,<3"
+numpy = ">=1.26.4,<2"
+h5py = ">=3.7.0,<4"
+ros-humble-tf2-tools = ">=0.25.1,<0.26"
+pynput = ">=1.8.1,<2"
+setuptools = "<80.0"
+transforms3d = ">=0.4.2,<0.5"
+ros-humble-v4l2-camera = ">=0.4.0,<0.5"
+ros-humble-rmw-fastrtps-cpp = ">=6.2.1,<7"
+foonathan-memory = "==0.7.1"
+eigen = ">=3.4.0,<4"
+pinocchio = ">=2.6.9,<3"
+ros-humble-joint-state-publisher = ">=2.3.0,<3"
+scipy = ">=1.13.1,<2"
+
+[pypi-dependencies]
+pyzmq = "*"
+opencv-python = "*"
+
+[pypi-options]
+index-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+extra-index-urls = ["https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"]

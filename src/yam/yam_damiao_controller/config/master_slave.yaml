@@ -1,0 +1,95 @@
+# Master-Slave 4-arm configuration
+# Master arms: gravity compensation (hand-guided), optional bilateral force feedback
+# Slave arms: joint position following from master status
+
+/master_l:
+  ros__parameters:
+    arm_can_id: can_master_l
+    arm_control_type: master
+    arm_pub_topic_name: master_l_status
+    arm_sub_topic_name: master_l_cmd
+    arm_control_period: 0.004
+    arm_kp_1_3: 0.0
+    arm_kp_4_6: 0.0
+    arm_kd_1_3: 0.0
+    arm_kd_4_6: 0.0
+    gripper_position_gain: 0.0
+    gripper_velocity_gain: 0.1
+    gripper_torque_limit: 0.5
+    gripper_open_assist: 0.0
+    gripper_assist_range_ratio: 0.4
+    gripper_calibration_step: 0.001
+    gripper_calibration_safety_factor: 1.2
+    go_home_kp: 25.0
+    go_home_kd: 0.5
+    bilateral_enabled: false
+    bilateral_kp_1_3: 5.0
+    bilateral_kp_4_6: 2.0
+    bilateral_kd_1_3: 0.2
+    bilateral_kd_4_6: 0.1
+    bilateral_slave_topic: slave_l_status
+
+# gripper_open_assist: 0.0 = auto-calibration at startup
+# gripper_open_assist: non-zero = manual override (negative = opening direction)
+# gripper_assist_range_ratio: fraction of travel with assist (0.4 = first 40%)
+
+/master_r:
+  ros__parameters:
+    arm_can_id: can_master_r
+    arm_control_type: master
+    arm_pub_topic_name: master_r_status
+    arm_sub_topic_name: master_r_cmd
+    arm_control_period: 0.004
+    arm_kp_1_3: 0.0
+    arm_kp_4_6: 0.0
+    arm_kd_1_3: 0.0
+    arm_kd_4_6: 0.0
+    gripper_position_gain: 0.0
+    gripper_velocity_gain: 0.1
+    gripper_torque_limit: 0.5
+    gripper_open_assist: 0.0
+    gripper_assist_range_ratio: 0.4
+    gripper_calibration_step: 0.001
+    gripper_calibration_safety_factor: 1.2
+    go_home_kp: 25.0
+    go_home_kd: 0.5
+    bilateral_enabled: false
+    bilateral_kp_1_3: 5.0
+    bilateral_kp_4_6: 2.0
+    bilateral_kd_1_3: 0.2
+    bilateral_kd_4_6: 0.1
+    bilateral_slave_topic: slave_r_status
+
+/slave_l:
+  ros__parameters:
+    arm_can_id: can_slave_l
+    arm_control_type: slave
+    arm_pub_topic_name: slave_l_status
+    arm_sub_topic_name: master_l_status
+    arm_control_period: 0.004
+    arm_kp_1_3: 120.0
+    arm_kp_4_6: 30.0
+    arm_kd_1_3: 2.0
+    arm_kd_4_6: 1.0
+    gripper_position_gain: 40.0
+    gripper_velocity_gain: 1.5
+    gripper_torque_limit: 6.0
+    go_home_kp: 25.0
+    go_home_kd: 0.5
+
+/slave_r:
+  ros__parameters:
+    arm_can_id: can_slave_r
+    arm_control_type: slave
+    arm_pub_topic_name: slave_r_status
+    arm_sub_topic_name: master_r_status
+    arm_control_period: 0.004
+    arm_kp_1_3: 120.0
+    arm_kp_4_6: 30.0
+    arm_kd_1_3: 2.0
+    arm_kd_4_6: 1.0
+    gripper_position_gain: 40.0
+    gripper_velocity_gain: 1.5
+    gripper_torque_limit: 6.0
+    go_home_kp: 25.0
+    go_home_kd: 0.5

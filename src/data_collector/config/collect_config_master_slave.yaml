@@ -1,0 +1,146 @@
+data_dir: "/home/shu/data/master_slave/0316_2_pusht"
+max_frames: 2000
+max_queue_size: 5
+max_age: 0.5
+collection_frequency: 15
+
+robot_number: 0
+
+datasets:
+  # ─── Cameras ───
+  "/observations/images/cam_left_wrist":
+    topic: "/cam_left_wrist/color/image_rect_raw"
+    processor: "data_collector.data_processor.ImageProcessor"
+    processor_config:
+      resize: [640, 480]
+      output_shape: [480, 640, 3]
+      dtype: "uint8"
+      description: "Left wrist camera image"
+
+  "/observations/images/cam_right_wrist":
+    topic: "/cam_right_wrist/color/image_rect_raw"
+    processor: "data_collector.data_processor.ImageProcessor"
+    processor_config:
+      resize: [640, 480]
+      output_shape: [480, 640, 3]
+      dtype: "uint8"
+      description: "Right wrist camera image"
+
+  "/observations/images/cam_high":
+    topic: "/cam_high/color/image_rect_raw"
+    processor: "data_collector.data_processor.ImageProcessor"
+    processor_config:
+      resize: [640, 480]
+      output_shape: [480, 640, 3]
+      dtype: "uint8"
+      description: "Top-mounted camera image"
+      
+  "/observations/depth/cam_high":
+     topic: "/cam_high/depth/image_rect_raw"
+     processor: "data_collector.data_processor.DepthProcessor"
+     processor_config:
+       resize: [640, 480]
+       output_shape: [480, 640]
+       dtype: "uint16"
+       description: "High camera depth image"
+
+  "/observations/images/cam_top":
+    topic: "/cam_top/color/image_rect_raw"
+    processor: "data_collector.data_processor.ImageProcessor"
+    processor_config:
+      resize: [640, 480]
+      output_shape: [480, 640, 3]
+      dtype: "uint8"
+      description: "Top camera image"
+      
+  "/observations/depth/cam_top":
+     topic: "/cam_top/depth/image_rect_raw"
+     processor: "data_collector.data_processor.DepthProcessor"
+     processor_config:
+       resize: [640, 480]
+       output_shape: [480, 640]
+       dtype: "uint16"
+       description: "Top camera depth image"
+
+  # ─── Left slave arm ───
+  "/state/joint_position/left":
+    topic: "/slave_l_status"
+    processor: "data_collector.data_processor.JointPositionProcessor"
+    processor_config:
+      output_shape: [7]
+      dtype: "float64"
+      description: "Left slave arm joint positions"
+
+  "/state/joint_velocity/left":
+    topic: "/slave_l_status"
+    processor: "data_collector.data_processor.JointVelocityProcessor"
+    processor_config:
+      output_shape: [7]
+      dtype: "float64"
+      description: "Left slave arm joint velocities"
+
+  "/state/joint_current/left":
+    topic: "/slave_l_status"
+    processor: "data_collector.data_processor.JointCurrentProcessor"
+    processor_config:
+      output_shape: [7]
+      dtype: "float64"
+      description: "Left slave arm joint currents"
+
+  # ─── Right slave arm ───
+  "/state/joint_position/right":
+    topic: "/slave_r_status"
+    processor: "data_collector.data_processor.JointPositionProcessor"
+    processor_config:
+      output_shape: [7]
+      dtype: "float64"
+      description: "Right slave arm joint positions"
+
+  "/state/joint_velocity/right":
+    topic: "/slave_r_status"
+    processor: "data_collector.data_processor.JointVelocityProcessor"
+    processor_config:
+      output_shape: [7]
+      dtype: "float64"
+      description: "Right slave arm joint velocities"
+
+  "/state/joint_current/right":
+    topic: "/slave_r_status"
+    processor: "data_collector.data_processor.JointCurrentProcessor"
+    processor_config:
+      output_shape: [7]
+      dtype: "float64"
+      description: "Right slave arm joint currents"
+
+topics:
+  "/cam_left_wrist/color/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Left wrist camera"
+
+  "/cam_right_wrist/color/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Right wrist camera"
+
+  "/cam_high/color/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Top-mounted camera"
+
+  "/cam_high/depth/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Top depth image"
+
+  "/cam_top/color/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Top camera"
+    
+  "/cam_top/depth/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Top depth image"
+
+  "/slave_l_status":
+    msg_type: "yam_arm_msg.msg.YamStatus"
+    description: "Left slave arm status"
+
+  "/slave_r_status":
+    msg_type: "yam_arm_msg.msg.YamStatus"
+    description: "Right slave arm status"

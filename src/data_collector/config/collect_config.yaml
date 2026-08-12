@@ -1,0 +1,172 @@
+data_dir: "/home/shu/data/0226"
+#data_dir: "/media/midea/eai-25/1010/01"
+max_queue_size: 5
+max_age: 0.5
+collection_frequency: 50
+
+
+robot_number: 0  #采集数据前 修改 机器标号!!!
+
+datasets:
+  # "/subtask":
+  #   topic: "/pedal_status"
+  #   processor: "data_collector.data_processor.PedalProcessor"
+  #   processor_config:
+  #     output_shape: [1]
+  #     dtype: "int32"
+  #     description: "Pedal status converted to subtask ID: step=10, double step=100, normal=0"
+
+  # "/observations/images/cam_right_wrist":
+  #   topic: "/cam_right_wrist/color/image_rect_raw"
+  #   processor: "data_collector.data_processor.ImageProcessor"
+  #   processor_config:
+  #     resize: [640, 480]
+  #     output_shape: [480, 640, 3]
+  #     dtype: "uint8"
+  #     description: "Right wrist camera image"
+
+  "/observations/images/cam_left_wrist":
+    topic: "/cam_left_wrist/color/image_rect_raw"
+    processor: "data_collector.data_processor.ImageProcessor"
+    processor_config:
+      resize: [640, 480]
+      output_shape: [480, 640, 3]
+      dtype: "uint8"
+      description: "Left wrist camera image"
+
+  # "/pointcloud_d457":
+  #  topic: "/cam_d457/depth/color/points"
+  #  processor: "data_collector.data_processor.PointcloudProcessor"
+  #  processor_config:
+  #    output_shape: [50000, 3]
+  #    dtype: "float16"
+  #    description: "Top-mounted D457 camera pointcloud"
+
+  # "/observations/images/cam_high":
+  #   topic: "/cam_d457/color/image_raw"
+  #   processor: "data_collector.data_processor.ImageProcessor"
+  #   processor_config:
+  #     resize: [640, 480]
+  #     output_shape: [480, 640, 3]
+  #     dtype: "uint8"
+  #     description: "Top-mounted D457 camera image"
+
+  "/observations/images/cam_high":
+    topic: "/cam_high/color/image_rect_raw"
+    processor: "data_collector.data_processor.ImageProcessor"
+    processor_config:
+      resize: [640, 480]
+      output_shape: [480, 640, 3]
+      dtype: "uint8"
+      description: "Top-mounted camera image"
+
+  # "/observations/depth/cam_high":
+  #   topic: "/cam_l515/depth/image_rect_raw"
+  #   processor: "data_collector.data_processor.DepthProcessor"
+  #   processor_config:
+  #     resize: [640, 480]
+  #     output_shape: [480, 640]
+  #     dtype: "uint16"
+  #     description: "Top-mounted depth image"
+
+  "/state/joint_position/left":
+    topic: "/arm_l_status"
+    processor: "data_collector.data_processor.JointPositionProcessor"
+    processor_config:
+      output_shape: [7]
+      dtype: "float64"
+      description: "Left arm joint positions"
+
+  # "/state/joint_position/right":
+  #   topic: "/arm_r_status"
+  #   processor: "data_collector.data_processor.JointPositionProcessor"
+  #   processor_config:
+  #     output_shape: [7]
+  #     dtype: "float64"
+  #     description: "Right arm joint positions"
+
+  "/state/joint_cur/left":
+    topic: "/arm_l_status"
+    processor: "data_collector.data_processor.JointCurrentProcessor"
+    processor_config:
+      output_shape: [7]
+      dtype: "float64"
+      description: "Right arm joint current"
+
+  # "/state/joint_cur/right":
+  #   topic: "/arm_r_status"
+  #   processor: "data_collector.data_processor.JointCurrentProcessor"
+  #   processor_config:
+  #     output_shape: [7]
+  #     dtype: "float64"
+  #     description: "Right arm joint current"
+
+  # "/state/base_vel":
+  #   topic: "/odom"
+  #   processor: "data_collector.data_processor.OdomProcessor"
+  #   processor_config:
+  #     output_shape: [6]
+  #     dtype: "float64"
+  #     description: "Base velocity (angular xyz + linear xyz)"
+
+  # "/action/base_vel":
+  #   topic: "/cmd_vel"
+  #   processor: "data_collector.data_processor.TwistProcessor"
+  #   processor_config:
+  #     output_shape: [6]
+  #     dtype: "float64"
+  #     description: "Base velocity command (angular xyz + linear xyz)"
+
+
+topics:
+  "/pedal_status":
+    msg_type: "sensor_msgs.msg.Joy"
+    description: "Pedal input device"
+
+  "/cam_right_wrist/color/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Right wrist camera"
+
+  "/cam_left_wrist/color/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Left wrist camera"
+
+  "/cam_front/color/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Front camera between arms"
+
+  "/cam_high/color/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "high camera"
+
+  "/cam_l515/color/image_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Top-mounted L515 camera"
+
+  "/cam_l515/depth/image_rect_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Top-mounted L515 depth image"
+
+  "/cam_d457/color/image_raw":
+    msg_type: "sensor_msgs.msg.Image"
+    description: "Top-mounted D457 camera"
+
+  "/cam_d457/depth/color/points":
+    msg_type: "sensor_msgs.msg.PointCloud2"
+    description: "Top-mounted D457 pointcloud"
+
+  "/arm_l_status":
+    msg_type: "yam_arm_msg.msg.YamStatus"
+    description: "Left arm status"
+
+  "/arm_r_status":
+    msg_type: "yam_arm_msg.msg.YamStatus"
+    description: "Right arm status"
+
+  "/odom":
+    msg_type: "nav_msgs.msg.Odometry"
+    description: "Base odometry"
+
+  "/cmd_vel":
+    msg_type: "geometry_msgs.msg.TwistStamped"
+    description: "Base velocity commands"

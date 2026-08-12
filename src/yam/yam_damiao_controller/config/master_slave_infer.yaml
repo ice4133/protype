@@ -1,0 +1,98 @@
+# Master-Slave-Infer 4-arm configuration
+# Master arms: gravity compensation + bilateral tracking toward slave arm.
+#   During inference the slave arm follows the ML model; bilateral feedback
+#   pulls the master arm to match, so when the operator grabs the master arm
+#   (intervention) there is no sudden position jump on the slave.
+# Slave arms: normal mode, follow YamCmd from intervention_relay_node (/YAM_VR_L/R)
+
+/master_l:
+  ros__parameters:
+    arm_can_id: can_master_l
+    arm_control_type: master
+    arm_pub_topic_name: master_l_status
+    arm_sub_topic_name: master_l_cmd
+    arm_control_period: 0.004
+    arm_kp_1_3: 0.0
+    arm_kp_4_6: 0.0
+    arm_kd_1_3: 0.0
+    arm_kd_4_6: 0.0
+    gripper_position_gain: 0.0
+    gripper_velocity_gain: 0.1
+    gripper_torque_limit: 0.5
+    gripper_open_assist: 0.0
+    gripper_assist_range_ratio: 0.4
+    gripper_calibration_step: 0.001
+    gripper_calibration_safety_factor: 1.2
+    go_home_kp: 25.0
+    go_home_kd: 0.5
+    # Bilateral ON: master arm tracks slave arm during inference.
+    # Keeps master/slave aligned so intervention (press S) has no position jump.
+    # Tune kp down if the arm feels too stiff to hand-guide; tune up if it lags too much.
+    bilateral_enabled: true
+    bilateral_kp_1_3: 8.0
+    bilateral_kp_4_6: 4.0
+    bilateral_kd_1_3: 0.3
+    bilateral_kd_4_6: 0.15
+    bilateral_slave_topic: slave_l_status
+
+/master_r:
+  ros__parameters:
+    arm_can_id: can_master_r
+    arm_control_type: master
+    arm_pub_topic_name: master_r_status
+    arm_sub_topic_name: master_r_cmd
+    arm_control_period: 0.004
+    arm_kp_1_3: 0.0
+    arm_kp_4_6: 0.0
+    arm_kd_1_3: 0.0
+    arm_kd_4_6: 0.0
+    gripper_position_gain: 0.0
+    gripper_velocity_gain: 0.1
+    gripper_torque_limit: 0.5
+    gripper_open_assist: 0.0
+    gripper_assist_range_ratio: 0.4
+    gripper_calibration_step: 0.001
+    gripper_calibration_safety_factor: 1.2
+    go_home_kp: 25.0
+    go_home_kd: 0.5
+    # Bilateral ON: same rationale as master_l above.
+    bilateral_enabled: true
+    bilateral_kp_1_3: 8.0
+    bilateral_kp_4_6: 4.0
+    bilateral_kd_1_3: 0.3
+    bilateral_kd_4_6: 0.15
+    bilateral_slave_topic: slave_r_status
+
+/slave_l:
+  ros__parameters:
+    arm_can_id: can_slave_l
+    arm_control_type: normal
+    arm_pub_topic_name: slave_l_status
+    arm_sub_topic_name: YAM_VR_L
+    arm_control_period: 0.004
+    arm_kp_1_3: 120.0
+    arm_kp_4_6: 30.0
+    arm_kd_1_3: 2.0
+    arm_kd_4_6: 1.0
+    gripper_position_gain: 20.0
+    gripper_velocity_gain: 1.0
+    gripper_torque_limit: 3.0
+    go_home_kp: 25.0
+    go_home_kd: 0.5
+
+/slave_r:
+  ros__parameters:
+    arm_can_id: can_slave_r
+    arm_control_type: normal
+    arm_pub_topic_name: slave_r_status
+    arm_sub_topic_name: YAM_VR_R
+    arm_control_period: 0.004
+    arm_kp_1_3: 120.0
+    arm_kp_4_6: 30.0
+    arm_kd_1_3: 2.0
+    arm_kd_4_6: 1.0
+    gripper_position_gain: 20.0
+    gripper_velocity_gain: 1.0
+    gripper_torque_limit: 3.0
+    go_home_kp: 25.0
+    go_home_kd: 0.5

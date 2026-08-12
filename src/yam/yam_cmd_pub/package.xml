@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>yam_cmd_pub</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="you@email.com">Your Name</maintainer>
+  <license>TODO: License declaration</license>
+
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>quest2_button_msg</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>yam_arm_msg</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
