@@ -6,9 +6,15 @@ platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
+build-marvin = "colcon build --symlink-install --packages-select marvin_description marvin_hardware_backend"
+check-marvin = "bash scripts/check_marvin_backend.sh"
+marvin-feedback = "bash scripts/read_marvin_feedback.sh"
+marvin-hold = "bash scripts/hold_marvin_position.sh"
+marvin-step = "bash scripts/move_marvin_joint_small.sh"
+marvin-real = "bash scripts/run_marvin_bridge.sh"
 
 [activation]
-scripts = ["install/setup.bash"]
+scripts = ["bash/pixi_activate.sh"]
 
 [activation.env]
 RMW_IMPLEMENTATION = "rmw_fastrtps_cpp"
